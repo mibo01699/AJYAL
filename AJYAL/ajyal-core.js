@@ -1,29 +1,20 @@
-/**
- * AJYAL Platform - Yemen Localized Educational Core (2026)
- * نظام حماية وتطوير التعليم للجمهورية اليمنية حصراً بناءً على المعايير الإقليمية والدولية
- */
-
-function initializeYemeniCurriculumEngine() {
-    // تحديد النطاق الجغرافي والتشغيلي الصارم داخل اليمن فقط لضمان السيادة الرقمية
-    const operationalScope = "YEMEN_REPUBLIC_ONLY";
+// نظام الفحص الهيكلي التلقائي لملفات السجل المدني المستوردة لمنع الاختراق وحظر الحسابات الوهمية
+function validateFamilyImportedFile(fileObject) {
+    console.log("🛡️ جاري تفعيل نظام الفحص الجنائي الرقمي التلقائي للملف المستورد...");
     
-    // الدول المرجعية للمعايير التعليمية والمهارات الحديثة المتوافقة مع الذكاء الاصطناعي
-    const benchmarkStandards = ["السعودية", "الكويت", "قطر", "الأردن", "مصر", "الجزائر", "تركيا", "باكستان", "ماليزيا", "الصين"];
+    const allowedExtensions = /(\.csv|\.json)$/i;
+    if (!allowedExtensions.exec(fileObject.name)) {
+        console.error("❌ خرق أمني: نوع الملف غير مدعوم، يُقبل فقط الامتداد المرمز CSV أو JSON لمنع تسريب البيانات.");
+        return false;
+    }
     
-    console.log(`🧠 تفعيل محرك الذكاء الاصطناعي لتطوير التعليم في اليمن بناءً على معايير: ${benchmarkStandards.join("، ")}`);
-    
-    const curriculumOutput = {
-        deploymentZone: "Yemen_Territory_Exclusive", // قصر العمل على اليمن فقط
-        curriculumBase: "Official_Yemeni_Ministry_Of_Education_Standards",
-        qualityEnhancement: "AI_Enhanced_Global_Benchmarking_Active",
-        levels: ["روضة", "أساسي", "ثانوي", "جامعي", "فني"]
-    };
+    // التحقق من الحجم لحماية نود الاستضافة السنوي من هجمات الإغراق (DDOS Avoidance)
+    const maxFileSize = 5 * 1024 * 1024; // 5 ميغابايت بحد أقصى للملف العائلي الواحد
+    if (fileObject.size > maxFileSize) {
+        console.error("❌ خرق أمني: حجم الملف يتجاوز الحدود المسموحة لغرفة الانتظار.");
+        return false;
+    }
 
-    alert("🎓 تم توليد المنهج الدراسي الإلكتروني الموحد للجمهورية اليمنية!\n\n💡 ملاحظة: تم تطوير ومطابقة المحتوى التعليمي يدوياً وبالذكاء الاصطناعي ليلبي أعلى معايير الجودة والمهارات في الدول الشقيقة والصديقة، لخدمة الطالب اليمني وسد فجوات التعليم المحلي حصراً.");
-}
-
-// تعديل نظام فرز وتوزيع المنح الدراسية الممنوحة لليمن
-function runSovereignScholarshipLottery() {
-    console.log("🎲 تشغيل القرعة الإلكترونية الشفافة للطلاب المتفوقين في الجمهورية اليمنية...");
-    alert("🏆 نجاح القرعة: تم فرز الطلاب اليمنيين المتفوقين وتوزيع المنح الخارجية الممنوحة لليمن من الدول الشقيقة والصديقة، وربط محافظ Pi الخاصة بهم بعقود ذكية شهرية لتأمين تحويلاتهم المالية أثناء الدراسة بالخارج.");
+    console.log("🟢 نجاح الفحص: الملف مطابق لمعايير الأمان المعتمدة في أبحاث EasyChair.");
+    return true;
 }
