@@ -1,20 +1,24 @@
-# # AJYAL DIGITAL PLATFORM (CORE HUB)
-
-## 
+# 🧬 AJYAL DIGITAL PLATFORM & YEMENI EDUCATIONAL SYSTEM
 
 ## 📜 Academic Scientific Background
-AJYAL is a next-generation decentralized verification hub engineered based on the peer-reviewed research papers and core models compiled on **EasyChair**:
-- **Smart Slide Track Reference 1:** [EasyChair Slide ktck](https://easychair.org/smart-slide/slide/ktck)
-- **Smart Slide Track Reference 2:** [EasyChair Slide KXFz](https://easychair.org/smart-slide/slide/KXFz)
-- **Core Architecture Leader:** Eng. Mayas Ali Ali Mayas
+AJYAL is a sovereign next-generation decentralized ecosystem engineered for the **Republic of Yemen**, constructed upon peer-reviewed research parameters and algorithms validated on **EasyChair**:
+- **Smart Slide Technical Track 1:** [EasyChair Slide ktck](https://easychair.org)
+- **Smart Slide Technical Track 2:** [EasyChair Slide KXFz](https://easychair.org)
+- **Principal Systems Engineer:** Eng. Mayas Ali Ali Mayas
 
-## 🛠️ Ecosystem Network Configuration
-This platform functions as a validation node for identity mapping across the parallel market, providing two critical layers:
-1. **KYB (Know Your Business):** Validates localized merchants and logistics units inside the GAV supply chain loop.
-2. **KYG (Know Your Geography):** Restricts aid and money transfers to specific physical zones, preventing economic double-dipping and systemic currency leakages.
+## 🌍 Geographic Scope & Operational Boundaries
+- **Target Deployment Zone:** Restricted strictly and exclusively to the territory of the **Republic of Yemen** to bridge domestic educational gaps and mitigate student attrition.
+- **Global Pedagogical Benchmarking:** The platform's integrated AI engine develops and structures the unified Yemeni curriculum to actively match the strict quality, linguistic, and modern skill frameworks of: **Saudi Arabia, Kuwait, Qatar, Jordan, Egypt, Algeria, Turkey, Pakistan, Malaysia, and China.** These countries serve solely as benchmark indicators for system standards and do not represent external deployment areas.
 
-## 🔗 Parallel Integration Gateway
-AJYAL automatically interfaces with the core deployment contract `YERToken.sol` hosted inside the [`BIGISH-YER` Repository](https://github.com/mibo01699/BIGISH-YER) to clear hybrid network transactions dynamically.
+## 🛠️ Integrated Core Subsystems (Yemen Deployment)
+1. **Family KYC Protocol (Civil Registry Integration):** Localized family mapping via Pi SDK username imports, protected under AES-256-GCM cloud structures to verify domestic civil identification sheets.
+2. **AI-Driven Unified Yemeni Syllabus:** High-aesthetic, emotionally expressive digital content adapted for Yemeni schools (Kindergarten, Primary, Secondary, University, and Technical levels).
+3. **Biometric Attention and Attendance Lock:** Audiovisual instruction grids running dynamic facial engagement verification to counter learning dropout tendencies.
+4. **Blockchain-Certified Rigid Exam Grid:** Tamper-proof end-of-year credentials printed straight onto the **Pi Network Blockchain** for Yemeni students.
+5. **Decentralized Yemeni Scholarship Lottery:** Automated non-biased selection protocols distributing foreign grants provided to the Yemeni Republic, backed by milestone-released monthly smart contracts supplying students' Pi Wallets abroad.
 
-## 📝 Licensing
-Licensed under the strict open-source **MIT License** terms.
+## 🔗 Node Infrastructure Tethering
+All domestic distribution layers are fundamentally synced with the central financial clearing engine at the [`BIGISH-YER` Repository](https://github.com).
+
+## 📝 License
+Distributed strictly under the **MIT Open Source License**.
