@@ -1,17 +1,15 @@
-# AJYAL - Decentralized Knowledge & Empowerment Platform
+# AJYAL - Decentralized Knowledge & Youth Empowerment Platform
 
-An open-source Web3 ecosystem tailored for youth empowerment and knowledge economy in conflict-affected regions (Case Study: Yemen), built strictly within the **Pi Network Ecosystem**.
+An open-source Web3 capacity building and digital educational gateway designed to cultivate the knowledge economy among youth in fragile and conflict-affected regions, fully optimized for the **Pi Network Layer 1 (Protocol 23)** ecosystem.
 
-## 🎯 Development & Alignment Principles
+## 🎯 Strategic Alignment & Mission
+The **AJYAL** framework acts as the human capital engine for the integrated stabilization model established across our twin technical repositories:
+1. **BIGISH-YER (The Core Financial Rail):** Where financial liquidity and micro-payroll infrastructure are managed.
+2. **GAV-The-Incense-Route (The Product Asset Rail):** Where tracking logs for local independent agricultural producers are secured.
 
-### 1. Pi Network Core Team Compliance
-- **Pi-Native Authentication:** Access is strictly limited via `Pi Authentication SDK`. No external logins (Email/Socials) are integrated, ensuring Sybil-resistance through Pi KYC.
-- **Pi-Only Economy:** All peer-to-peer knowledge exchanges, micro-incentives, and service fees are settled exclusively using Pi payments via Pi SDK. No fiat or external tokens.
-- **Enclosed UX:** The application operates 100% inside the Pi Browser environment to eliminate external phishing risks.
+AJYAL directly trains, organizes, and incentivizes networks of young technical enumerators and operators on the ground to deploy and facilitate these specialized Web3 interfaces inside rural and disconnected Yemeni merchant markets.
 
-### 2. UN Sustainable Development Goals (SDGs)
-- **Goal 4 (Quality Education):** Decentralized skill-sharing.
-- **Goal 8 (Decent Work & Economic Growth):** Creating digital livelihood opportunities for youth in fragile economies.
-
-## 🛠️ Technical Architecture
-
+## 🔒 Strict Technical Alignment (Pi Core Mandates)
+- **KYC Bound User Base:** To assure strict compliance for international donor funding and eradicate fraud, access to the AJYAL peer-to-peer ecosystem is exclusively mapped via the `Pi Authentication SDK`. Every student and coach must be verified through the official Pi Biometric KYC system.
+- **Micro-Incentive Settlements:** Learning achievements, micro-task verifications, and knowledge sharing fees are managed without cash or external tokens. The engine triggers localized service rewards using the hybrid **YER/Pi** settlement network operated by the `BIGISH` treasury backend.
+- **MIT Digital Public Good:** Fully certified under the **MIT License** to run transparently as an accessible Digital Public Good (DPG) serving UN Sustainable Development Goal 4 (Quality Education) and Goal 8 (Decent Work & Economic Growth).
