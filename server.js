@@ -1,28 +1,28 @@
 // ============================================================
 // الملف: server.js
 // المسار: AJYAL/server.js
-// الدور: الخادم الرئيسي لتطبيق AJYAL التعليمي
+// الدور: الخادم الرئيسي لتطبيق AJYAL التعليمي (نسخة موحدة)
 // ============================================================
 
 const express = require('express');
 const cors = require('cors');
-const { authenticatePiUser } = require('./ajyal-core');
+const crypto = require('crypto');
+const { authenticatePiUser, enrollStudent, updateProgress } = require('./ajyal-core');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3001; // استخدام منفذ واحد فقط
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 
 // ============================================================
-// واجهات API
+// واجهات API التعليمية
 // ============================================================
 
 /**
  * API: تسجيل الدخول عبر Pi Auth SDK
  * POST /api/auth/pi
- * Body: { "piUserId": "GABC123..." }
  */
 app.post('/api/auth/pi', async (req, res) => {
     try {
@@ -55,7 +55,6 @@ app.post('/api/auth/pi', async (req, res) => {
  * GET /api/courses
  */
 app.get('/api/courses', (req, res) => {
-    // بيانات وهمية للدورات
     const courses = [
         { id: 1, title: 'مقدمة في البلوكشين', level: 'مبتدئ' },
         { id: 2, title: 'برمجة العقود الذكية', level: 'متقدم' },
@@ -67,7 +66,6 @@ app.get('/api/courses', (req, res) => {
 /**
  * API: التسجيل في دورة
  * POST /api/enroll
- * Body: { "userId": "GABC123...", "courseId": 1 }
  */
 app.post('/api/enroll', async (req, res) => {
     try {
@@ -76,7 +74,7 @@ app.post('/api/enroll', async (req, res) => {
             return res.status(400).json({ error: 'بيانات غير مكتملة' });
         }
 
-        // هنا سيتم استدعاء منطق التسجيل من ajyal-core.js
+        // استدعاء الدالة المستوردة من ajyal-core.js
         const enrollment = await enrollStudent(userId, courseId);
         res.json({
             success: true,
@@ -89,27 +87,37 @@ app.post('/api/enroll', async (req, res) => {
     }
 });
 
-// تشغيل الخادم
+// ============================================================
+// واجهات API لإدارة المساعدات (AID)
+// ============================================================
+
+/**
+ * API: توليد كود مساعدة مشفر
+ * POST /api/generate-aid-token
+ */
+app.post('/api/generate-aid-token', (req, res) => {
+    const { familyKycId } = req.body;
+    if (!familyKycId) {
+        return res.status(400).json({ status: "ERROR", message: "Missing KYC Identity Data" });
+    }
+
+    const token = crypto
+        .createHash('sha256')
+        .update(familyKycId + Date.now().toString())
+        .digest('hex')
+        .substring(0, 12)
+        .toUpperCase();
+
+    res.json({ 
+        status: "SUCCESS", 
+        aidCode: `GAV-AID-${token}` 
+    });
+});
+
+// ============================================================
+// تشغيل الخادم (مرة واحدة فقط)
+// ============================================================
 app.listen(PORT, () => {
     console.log(`🚀 خادم AJYAL يعمل على المنفذ ${PORT}`);
     console.log(`📚 منصة التعليم اللامركزي جاهزة للاختبار`);
 });
-
-const express = require('express');
-const cors = require('cors');
-const crypto = require('crypto');
-const app = express();
-const PORT = process.env.PORT || 5000;
-
-app.use(cors());
-app.use(express.json());
-
-// نظام توليد كود السلال المشفر المحصن إلكترونياً
-app.post('/api/generate-aid-token', (req, res) => {
-    const { familyKycId } = req.body;
-    if(!familyKycId) return res.status(400).json({ status: "ERROR", message: "Missing KYC Identity Data" });
-
-    // توليد هاش مشفر ومقفل كود حالة عير قابل للتزوير
-    const token = crypto.createHash('sha256').update(familyKycId + Date.now().toString()).digest('hex').substring(0, 12).toUpperCase();
-    res.json({ status: "SUCCESS", aidCode: `GAV-AID-${token}` });
-
