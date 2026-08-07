@@ -1,43 +1,47 @@
-# AJYAL - Conflict-Zone Decentralized Education Architecture
+Ajyal – A Decentralized Learning Architecture in Conflict Zones
 
-This document details the resilient technical framework of the AJYAL platform, engineered to deploy free, secure, and un-adulterated remote education to children and youth in high-risk, infrastructure-degraded environments (Case Study: Sana'a, Yemen).
+This document outlines the robust technical framework of the Ajyal platform, designed to provide free, secure, and unrestricted distance learning for children and youth in high-risk environments with deteriorating infrastructure (Case Study: Sana'a, Yemen).
 
----
+📡 1. Global Offline Mobile Storage Core
 
-## 📡 1. Universal Offline-First Mobile Storage Core
-To defeat ongoing internet blockades, surveillance, and poor local telecommunications grids, AJYAL operates a low-footprint, offline-ready runtime library compatible with any standard mobile device (Android/iOS):
-- **Download & Lock Sync:** Users require active connectivity only once to securely download and fetch authenticated data packages. 
-- **100% Offline Runtime & Content Saving:** Once a course, training asset, or curriculum block is compiled, the content is saved and permanently cached inside the smartphone's local isolated storage. Students can view interactive lectures, read text materials, execute quizzes, and complete assignments completely offline with **zero active cellular or internet data requirements from any mobile phone**.
-- **Cryptographic Batch Processing:** The application logs student learning progress, tracking metrics, and verified scores offline. These logs are compiled into local cryptographic transaction batches, which are pushed to the Pi Network Layer 1 ledger seamlessly the moment the mobile phone connects to an outbound network block.
-- **P2P Local Sync:** Alternatively, students can sync their learning progress, verify assignments, and download lessons peer-to-peer (P2P) via local WiFi mesh or encrypted bluetooth data exchanges, requiring zero permanent internet connectivity.
+To overcome ongoing internet blockades, surveillance, and weak local networks, Ajyal operates a compact, offline-ready library compatible with any standard mobile device (Android/iOS):
 
+Download and Sync Lock: Users only need an active connection once to securely download and retrieve authenticated data packages.
 
-### Institutional Enforcement Modules:
-1. **UNICEF Sovereign Oversight Platform:** UNICEF serves as the primary technical and educational supervisor. Every curriculum structural release must pass automated digital verification audits to match international quality baselines.
-2. **Ministry of Education (Aden-Based):** Controls the definitive, unaltered source data entry for all Basic and Secondary school levels for schools of primary and secondary education (Grades 1 to 12).
-3. **Ministry of Higher Education & Scientific Research (Aden-Based):** Governs course validation, academic credentials, and source data entry for university-level degrees and scientific disciplines across universities.
-4. **Ministry of Technical Education & Vocational Training (Aden-Based):** Controls technical certifications, vocational training pathways, and engineering/industrial curricula blocks for technical institutes.
-5. **Ministry of Public Health & Population (Aden-Based):** Standardizes and uploads official curriculum streams for allied health science institutes and medical training courses.
+Play and Save Content 100% Offline: Once a course, learning material, or module is compiled, the content is permanently saved and cached within the smartphone's isolated local storage.  Students can watch interactive lectures, read course materials, take quizzes, and complete assignments without needing an internet connection or mobile data, all from any mobile phone.
 
----
+Encrypted Batch Processing: The app records students’ learning progress, performance indicators, and verified grades offline. These records are compiled into local, encrypted transaction batches, seamlessly sent to a Layer 1 record on the Pi network as soon as the mobile phone connects to an external network.
 
-## 🧠 2. Sovereign Curriculum Integrity & Multi-Ministerial Governance
-To completely eliminate the programmatic injection of extremist, militarized, and altered ideologies into textbook frameworks by local armed militias, the system strictly prohibits local entities inside conflict-heavy territories from modifying, uploading, or interacting with curriculum blocks. 
+Local Peer-to-Peer Synchronization: Alternatively, students can synchronize their learning progress, check assignments, and download lessons peer-to-peer (P2P) via a local Wi-Fi network or encrypted Bluetooth data exchange, without requiring a constant internet connection.
 
-The validation and entry of official educational curricula are executed exclusively under the full supervision of **UNICEF** and implemented through the official representatives of the recognized, sovereign Ministries of the legitimate government in Aden:
+Institutional Enforcement Units:
 
----
+UNICEF Sovereign Oversight Platform: UNICEF acts as the lead technical and educational supervisor. Every curriculum structured release must pass automated digital verification audits to ensure compliance with international quality standards.
 
-## 🛡️ 3. Tamper-Proof Cryptographic Hashing & Curricula Protection
-Every single lesson, video module, text asset, and examination sheet uploaded by the authorized ministerial representatives in Aden under UNICEF oversight is signed with a unique cryptographic block hash before integration.
-- **Immutable Knowledge Logs:** All academic materials hosted on AJYAL are permanently hashed onto the blockchain ledger to combat forced curriculum changes by local militias.
-- **Tamper-Proof Education:** Any attempt by local militias on the ground to modify, alter, or replace educational content will instantly cause a validation hash mismatch. The application on the child's phone will automatically drop and neutralize the compromised block, preserving the educational integrity and ideological safety of the vulnerable child.
+ The Ministry of Education (based in Aden) is responsible for entering the final, unaltered source data for all stages of basic and secondary education in primary and secondary schools (grades 1-12).
 
----
+The Ministry of Higher Education and Scientific Research (based in Aden) oversees the accreditation of curricula, academic qualifications, and the entry of source data for university degrees and scientific specializations across various universities.
 
-## 🔒 4. Anti-Fraud Incentive Routing (Dual Platform Sync)
-- **Direct Biometric Mapping:** Integrates directly with `AntiDoubleDippingEngine.js` hosted in the `BIGISH-YER` core engine. Learning rewards, micro-stipends, and digital survival vouchers are strictly bound to verified biometric human children via the native `Pi Authentication SDK` (Pi KYC).
-- **Zero Intermediary Leakage:** Completely eliminates ghost 
+The Ministry of Technical Education and Vocational Training (based in Aden) oversees technical certificates, vocational training pathways, and engineering/industrial curriculum units for technical institutes.
 
----
+The Ministry of Public Health and Population (based in Aden) works to standardize and upload the official curriculum pathways for allied health sciences institutes and medical training courses.
 
+2. Curriculum Supremacy and Joint Ministerial Administration
+
+To completely eliminate the introduction of extremist, militaristic, and distorted ideologies into school textbooks by local armed militias, the system strictly prohibits local authorities within areas experiencing intense conflict from modifying, uploading, or interacting with any component of the curriculum.
+
+ The verification and integration of official curricula are conducted exclusively under UNICEF's full supervision and implemented through official representatives of the recognized sovereign ministries of the legitimate government in Aden.
+
+🛡️ 3. Tamper-Proof Encryption and Curriculum Protection
+
+Every lesson, video unit, text, and exam paper uploaded by authorized ministerial representatives in Aden, under UNICEF's supervision, is signed with a unique encryption code before integration.
+
+Immortal Knowledge Records: All academic materials hosted on the Ajial platform are permanently stored on the blockchain to prevent forced curriculum changes by local militias.
+
+Tamper-Resistant Education: Any attempt by local militias to hack into the system to modify, change, or replace educational content will immediately result in a verification code mismatch. The application will automatically drop and neutralize the compromised block, thus preserving the integrity of the educational process and the intellectual security of the child.
+
+ 🔒 4. Fraud Prevention Incentives (Dual-Platform Synchronization)
+
+Direct Biometric Linkage: Integrates directly with AntiDoubleDippingEngine.js hosted on the BIGISH-YER core engine. Learning rewards, micro-grants, and digital survival vouchers are closely linked to children whose biometric data has been verified via the Pi KYC Software Development Kit (SDK).
+
+No Intermediary Leakage: Completely eliminates fake data.
