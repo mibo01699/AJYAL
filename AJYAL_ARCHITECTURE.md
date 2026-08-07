@@ -21,6 +21,13 @@ To defeat ongoing internet blockades, surveillance, and poor local telecommunica
 
 ---
 
+## 🧠 2. Sovereign Curriculum Integrity & Multi-Ministerial Governance
+To completely eliminate the programmatic injection of extremist, militarized, and altered ideologies into textbook frameworks by local armed militias, the system strictly prohibits local entities inside conflict-heavy territories from modifying, uploading, or interacting with curriculum blocks. 
+
+The validation and entry of official educational curricula are executed exclusively under the full supervision of **UNICEF** and implemented through the official representatives of the recognized, sovereign Ministries of the legitimate government in Aden:
+
+---
+
 ## 🛡️ 3. Tamper-Proof Cryptographic Hashing & Curricula Protection
 Every single lesson, video module, text asset, and examination sheet uploaded by the authorized ministerial representatives in Aden under UNICEF oversight is signed with a unique cryptographic block hash before integration.
 - **Immutable Knowledge Logs:** All academic materials hosted on AJYAL are permanently hashed onto the blockchain ledger to combat forced curriculum changes by local militias.
@@ -33,9 +40,4 @@ Every single lesson, video module, text asset, and examination sheet uploaded by
 - **Zero Intermediary Leakage:** Completely eliminates ghost 
 
 ---
-
-## 🧠 2. Sovereign Curriculum Integrity & Multi-Ministerial Governance
-To completely eliminate the programmatic injection of extremist, militarized, and altered ideologies into textbook frameworks by local armed militias, the system strictly prohibits local entities inside conflict-heavy territories from modifying, uploading, or interacting with curriculum blocks. 
-
-The validation and entry of official educational curricula are executed exclusively under the full supervision of **UNICEF** and implemented through the official representatives of the recognized, sovereign Ministries of the legitimate government in Aden:
 
