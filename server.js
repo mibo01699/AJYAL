@@ -206,3 +206,158 @@ app.get('/api/special-needs/record/:piUserId', (req, res) => {
         res.status(404).json({ success: false, error: error.message });
     }
 });
+
+// ============================================================
+// إضافات إلى server.js (واجهات برمجة التطبيقات لإدارة الأكواد)
+// ============================================================
+
+const {
+    generateVoucher,
+    verifyVoucher,
+    redeemVoucher,
+    getVouchersForBeneficiary,
+    getVoucherStats
+} = require('./voucher-system');
+
+// ... (الكود الموجود سابقاً) ...
+
+// ============================================================
+// واجهات برمجة التطبيقات (APIs) للأكواد
+// ============================================================
+
+/**
+ * API: توليد كود جديد لمستفيد من ذوي الاحتياجات الخاصة
+ * POST /api/voucher/generate
+ * Body: { "piUserId": "GABC...", "items": [{"name": "أرز", "quantity": 5}], "value": 25 }
+ */
+app.post('/api/voucher/generate', (req, res) => {
+    try {
+        const { piUserId, items, value, expiryDays } = req.body;
+
+        if (!piUserId || !items || !value) {
+            return res.status(400).json({ error: 'بيانات غير مكتملة' });
+        }
+
+        // 1. التأكد من أن المستخدم مسجل في نظام ذوي الاحتياجات الخاصة
+        const { getSpecialNeedsRecordByPiId } = require('./ajyal-core');
+        const record = getSpecialNeedsRecordByPiId(piUserId);
+
+        if (!record || record.status !== 'verified') {
+            return res.status(403).json({
+                error: 'المستخدم غير مؤهل. يجب أن يكون مسجلاً وموثقاً في نظام ذوي الاحتياجات الخاصة'
+            });
+        }
+
+        // 2. توليد الكود
+        const voucher = generateVoucher(
+            piUserId,
+            record.fullName || 'مستفيد',
+            items,
+            value,
+            expiryDays || 30
+        );
+
+        // 3. إرسال إشعار للمستفيد (يمكن تنفيذه لاحقاً)
+        console.log(`📨 تم إصدار كود جديد للمستفيد ${record.fullName}: ${voucher.code}`);
+
+        res.status(201).json({
+            success: true,
+            message: 'تم توليد الكود بنجاح',
+            voucher: {
+                code: voucher.code,
+                items: voucher.items,
+                value: voucher.value,
+                expiryDate: voucher.expiryDate
+            }
+        });
+
+    } catch (error) {
+        console.error('خطأ في توليد الكود:', error);
+        res.status(400).json({ error: error.message });
+    }
+});
+
+/**
+ * API: التحقق من صحة كود (لنقاط البيع)
+ * POST /api/voucher/verify
+ * Body: { "code": "ABCD1234...", "redeemerPiId": "GABC..." }
+ */
+app.post('/api/voucher/verify', (req, res) => {
+    try {
+        const { code, redeemerPiId } = req.body;
+        if (!code || !redeemerPiId) {
+            return res.status(400).json({ error: 'الكود ومعرف نقطة البيع مطلوبان' });
+        }
+
+        const result = verifyVoucher(code, redeemerPiId);
+        if (!result.valid) {
+            return res.status(400).json({ success: false, message: result.message });
+        }
+
+        res.json({
+            success: true,
+            voucher: result.voucher
+        });
+
+    } catch (error) {
+        console.error('خطأ في التحقق من الكود:', error);
+        res.status(500).json({ error: 'فشل في التحقق من الكود' });
+    }
+});
+
+/**
+ * API: استبدال كود (صرف السلع)
+ * POST /api/voucher/redeem
+ * Body: { "code": "ABCD1234...", "redeemerPiId": "GABC..." }
+ */
+app.post('/api/voucher/redeem', (req, res) => {
+    try {
+        const { code, redeemerPiId } = req.body;
+        if (!code || !redeemerPiId) {
+            return res.status(400).json({ error: 'الكود ومعرف نقطة البيع مطلوبان' });
+        }
+
+        const result = redeemVoucher(code, redeemerPiId);
+        if (!result.success) {
+            return res.status(400).json({ success: false, message: result.message });
+        }
+
+        res.json({
+            success: true,
+            message: result.message,
+            voucher: result.voucher
+        });
+
+    } catch (error) {
+        console.error('خطأ في استبدال الكود:', error);
+        res.status(500).json({ error: 'فشل في استبدال الكود' });
+    }
+});
+
+/**
+ * API: الحصول على قائمة الأكواد لمستفيد
+ * GET /api/voucher/list/:piUserId
+ */
+app.get('/api/voucher/list/:piUserId', (req, res) => {
+    try {
+        const { piUserId } = req.params;
+        const vouchers = getVouchersForBeneficiary(piUserId);
+        res.json({ success: true, vouchers });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+/**
+ * API: الحصول على إحصائيات الأكواد
+ * GET /api/voucher/stats
+ */
+app.get('/api/voucher/stats', (req, res) => {
+    try {
+        const stats = getVoucherStats();
+        res.json({ success: true, stats });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
