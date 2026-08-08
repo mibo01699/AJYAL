@@ -35,3 +35,24 @@ This project functions as the human development pillar supporting the macroecono
 - **KYC Bound User Base:** To assure strict compliance for international donor funding and eradicate fraud, access to the AJYAL peer-to-peer ecosystem is exclusively mapped via the `Pi Authentication SDK`. Every student and coach must be verified through the official Pi Biometric KYC system.
 - **Micro-Incentive Settlements:** Learning achievements, micro-task verifications, and knowledge sharing fees are managed without cash or external tokens. The engine triggers localized service rewards using the hybrid **YER/Pi** settlement network operated by the `BIGISH` treasury backend.
 - **MIT Digital Public Good:** Fully certified under the **MIT License** to run transparently as an accessible Digital Public Good (DPG) serving UN Sustainable Development Goal 4 (Quality Education) and Goal 8 (Decent Work & Economic Growth).
+
+## 🧩 نظام إدارة المساعدات العينية (Voucher System)
+
+AJYAL يتضمن نظاماً متكاملاً لإدارة الأكواد المشفرة للمساعدات العينية، مخصص حصراً لـ **ذوي الاحتياجات الخاصة والمعاقين خَلقياً**.
+
+### الميزات الرئيسية:
+- **توليد أكواد مشفرة:** لكل مستفيد ولكل سلة غذائية.
+- **التحقق من الصلاحية:** التأكد من عدم انتهاء صلاحية الكود أو استخدامه مسبقاً.
+- **صرف السلع:** استبدال الكود بالسلع في نقاط البيع (عبر تطبيق GAV).
+- **التكامل مع BIGISH-YER:** تسوية مستحقات نقاط البيع مالياً.
+
+### واجهات برمجة التطبيقات (APIs) الرئيسية:
+- `POST /api/voucher/generate` – إصدار كود جديد.
+- `POST /api/voucher/verify` – التحقق من صحة الكود.
+- `POST /api/voucher/redeem` – صرف الكود (استبداله بسلع).
+- `GET /api/voucher/list/:piUserId` – قائمة أكواد مستفيد.
+- `GET /api/voucher/stats` – إحصائيات الأكواد.
+
+### الربط مع التطبيقات الأخرى:
+- **GAV:** يستخدم واجهات `/api/voucher/verify` و `/api/voucher/redeem` لصرف السلع.
+- **BIGISH-YER:** يستخدم نظام المقاصة (`clearing-system.js`) لتسوية المدفوعات.
