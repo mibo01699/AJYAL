@@ -121,3 +121,88 @@ app.listen(PORT, () => {
     console.log(`🚀 خادم AJYAL يعمل على المنفذ ${PORT}`);
     console.log(`📚 منصة التعليم اللامركزي جاهزة للاختبار`);
 });
+
+
+// ============================================================
+// إضافات إلى server.js (واجهات برمجة التطبيقات لنظام ذوي الاحتياجات الخاصة)
+// ============================================================
+
+const {
+    authenticatePiUser,
+    enrollStudent,
+    updateProgress,
+    registerSpecialNeedsUser,
+    verifySpecialNeedsDocument,
+    getSpecialNeedsList,
+    getSpecialNeedsRecordByPiId
+} = require('./ajyal-core');
+
+// ... (الكود الموجود سابقاً) ...
+
+// ============================================================
+// واجهات برمجة التطبيقات (APIs) الجديدة
+// ============================================================
+
+/**
+ * API: تسجيل مستفيد جديد (ذوي احتياجات خاصة)
+ * POST /api/special-needs/register
+ * Body: { "piUserId": "GABC...", "fullName": "...", "disabilityType": "...", ... }
+ */
+app.post('/api/special-needs/register', (req, res) => {
+    try {
+        const { piUserId, ...data } = req.body;
+        if (!piUserId) {
+            return res.status(400).json({ error: 'معرف Pi مطلوب' });
+        }
+        const record = registerSpecialNeedsUser(piUserId, data);
+        res.status(201).json({ success: true, record });
+    } catch (error) {
+        res.status(400).json({ success: false, error: error.message });
+    }
+});
+
+/**
+ * API: التحقق من وثائق مستفيد
+ * POST /api/special-needs/verify
+ * Body: { "recordId": "sn_...", "docHash": "...", "gpsData": { "lat": 12.3, "lng": 44.5 } }
+ */
+app.post('/api/special-needs/verify', (req, res) => {
+    try {
+        const { recordId, docHash, gpsData, notes } = req.body;
+        if (!recordId || !docHash || !gpsData) {
+            return res.status(400).json({ error: 'بيانات التحقق غير مكتملة' });
+        }
+        const result = verifySpecialNeedsDocument(recordId, { docHash, gpsData, notes });
+        res.json({ success: true, result });
+    } catch (error) {
+        res.status(400).json({ success: false, error: error.message });
+    }
+});
+
+/**
+ * API: الحصول على قائمة المستفيدين
+ * GET /api/special-needs/list?status=verified
+ */
+app.get('/api/special-needs/list', (req, res) => {
+    try {
+        const status = req.query.status || 'all';
+        const list = getSpecialNeedsList(status);
+        res.json({ success: true, list });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
+/**
+ * API: الحصول على سجل مستفيد بواسطة معرف Pi
+ * GET /api/special-needs/record/:piUserId
+ */
+app.get('/api/special-needs/record/:piUserId', (req, res) => {
+    try {
+        const { piUserId } = req.params;
+        const record = getSpecialNeedsRecordByPiId(piUserId);
+        res.json({ success: true, record });
+    } catch (error) {
+        res.status(404).json({ success: false, error: error.message });
+    }
+});
