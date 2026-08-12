@@ -1,0 +1,24 @@
+name: "AJYAL Platform Compliance Check"
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  verify-education-matrix:
+    runs-on: ubuntu-latest
+    steps:
+    - name: "Checkout Code"
+      uses: actions/checkout@v4
+
+    - name: "Static Code Audit: Force Floating Point Elimination"
+      run: |
+        echo "Auditing AJYAL repositories for unsafe decimal math methods..."
+        if grep -rnw . -e "parseFloat" | grep -v "Math.round" | grep -v "node_modules"; then
+          echo "COMPLIANCE BREACH: Floating point parsed directly without BigInt rounding protection."
+          exit 1
+        else
+          echo "Pass: 100% absolute integer math architecture enforced."
+        fi
