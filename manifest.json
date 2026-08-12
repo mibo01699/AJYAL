@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "AJYAL Educational Ecosystem",
+  "version": "1.0.0",
+  "description": "Decentralized knowledge and Web3 education gateway for conflict zones compliant with UNICEF Standards.",
+  "developer": {
+    "name": "mibo01699"
+  },
+  "pi_network": {
+    "app_id": "ajyal-education-2026",
+    "sandbox": true,
+    "required_scopes": ["username", "payments", "wallet_address"]
+  },
+  "permissions": [
+    "identity",
+    "storage"
+  ]
+}
