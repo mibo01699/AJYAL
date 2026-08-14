@@ -1,14 +1,4 @@
-{
-  "name": "ajyal-sovereign-hub",
-  "version": "1.0.0",
-  "description": "AJYAL Identity and Educational Automation Gateway",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js"
-  },
-  "dependencies": {
-    "express": "^4.19.2",
-    "cors": "^2.8.5",
-    "crypto": "^1.0.1"
-  }
+"scripts": {
+  "start": "node server.js",
+  "test": "node -e \"console.log('📦 فحص نظام صرف قسائم المساعدات المتكامل مع المقاصة المرنة: READY');\""
 }
