@@ -1,0 +1,39 @@
+// AJYAL -> frontend/ajyal-pi-bridge.js
+/**
+ * جسر ربط تطبيق أجيال مع واجهات Pi SDK المحدثة لعام 2026
+ * يضمن تشغيل التطبيق في الوضع التجريبي والمصادقة الموحدة لحسابات المستخدمين
+ */
+
+const AjyalPiIntegration = {
+    init: async function() {
+        try {
+            // تهيئة البيئة التجريبية (Sandbox) لجمهور شبكة Pi
+            await window.Pi.init({ version: "2.0", sandbox: true });
+            console.log("🌟 تم دمج واجهة أجيال داخل استوديو تطبيقات Pi بنجاح.");
+            await this.verifyUserCompliance();
+        } catch (e) {
+            console.error("فشل ربط Pi SDK في أجيال:", e);
+        }
+    },
+
+    verifyUserCompliance: async function() {
+        const scopes = ['username', 'payments', 'wallet_address'];
+        const authResult = await window.Pi.authenticate(scopes, (incompletePayment) => {
+            console.log("معاملة معلقة في أجيال:", incompletePayment);
+        });
+
+        // إرسال البيانات فوراً لـ COBRA لتوثيق الهوية في السجل الموحد للمنظومة كاملة
+        await fetch('https://repl.co', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                piUserId: authResult.user.uid,
+                username: authResult.user.username,
+                appSource: "AJYAL_Platform"
+            })
+        });
+        console.log(`✅ تم توحيد هوية مستخدم أجيال [${authResult.user.username}] بنجاح في المنظومة.`);
+    }
+};
+
+document.addEventListener("DOMContentLoaded", () => AjyalPiIntegration.init());
