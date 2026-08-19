@@ -1,0 +1,15 @@
+{
+  "name": "ajyal",
+  "version": "1.0.0",
+  "description": "Interactive Generational Management Platform - A.E.C.",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node src/main.js",
+    "dev": "node src/main.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "author": "mibo01699",
+  "license": "MIT"
+}
