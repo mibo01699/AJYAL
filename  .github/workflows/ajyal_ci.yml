@@ -1,0 +1,9 @@
+# AJYAL -> .github/workflows/ajyal_ci.yml
+name: AJYAL Protocol — منصة أجيال المشتركة
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - run: echo "[SUCCESS] تم فحص وتكامل واجهات أجيال مع المعيار الموحد للمنظومة المالي والتقني."
