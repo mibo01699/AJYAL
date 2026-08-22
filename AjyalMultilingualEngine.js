@@ -37,3 +37,22 @@ class AjyalSmartAidEngine {
     }
 }
 module.exports = AjyalSmartAidEngine;
+// AjyalMultilingualEngine.js - محرك الترجمة الديناميكي خفيف استهلاك البيانات (Low-Bandwidth Optimized)
+class AjyalMultilingualEngine {
+    constructor() {
+        this.dictionary = {
+            ar: { app_name: "أجيال السيادية", dashboard: "لوحة التحكم اللامركزية", sync_btn: "مزامنة البيانات ميدانياً" },
+            en: { app_name: "AJYAL Sovereign", dashboard: "Decentralized Dashboard", sync_btn: "Field Data Sync" }
+        };
+    }
+
+    // جلب المفاتيح النصية بسرعة فائقة دون استهلاك الذاكرة أو حزم الإنترنت
+    translate(langCode, key) {
+        const lang = this.dictionary[langCode] || this.dictionary['ar'];
+        return lang[key] || key;
+    }
+}
+
+module.exports = { AjyalMultilingualEngine };
+
+
