@@ -373,3 +373,7 @@ app.get('/api/localization', (req, res) => {
     res.json(localizationData);
 });
 
+const ajyalRouter = require('./ajyal-server-router');
+app.use('/', ajyalRouter);
+
+
