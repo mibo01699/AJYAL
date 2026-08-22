@@ -158,5 +158,24 @@ router.post('/api/ecosystem/trigger-quad-cycle', async (req, res) => {
 router.get('/api/ecosystem/global-donor-dashboard', (req, res) => {
     res.json(quadMaster.generateGlobalDonorAuditDashboard());
 });
+// إضافة ودعم نظام الإشعارات الدولي بداخل ajyal-server-router.js
+const { AjyalSupportSystem } = require('./AjyalSupportSystem');
+const supportSystem = new AjyalSupportSystem();
+
+// مسار بث الإشعارات المترجمة فوراً للطلاب أو أولياء الأمور عبر شبكات الميش المحلية
+router.post('/api/support/generate-alert', (req, res) => {
+    const { lang, messageKey, variables } = req.body;
+    
+    const notificationBlock = supportSystem.formatNotification(lang, messageKey, variables);
+    res.json({ success: true, notificationBlock });
+});
+
+// مسار التوجيه التربوي المدعوم بالذكاء الاصطناعي منخفض الاستهلاك
+router.post('/api/support/ai-consultant', (req, res) => {
+    const { lang, studentScore } = req.body;
+    
+    const adviceText = supportSystem.getAIPedagogicalAdvice(lang, studentScore);
+    res.json({ success: true, adviceText });
+});
 
 
