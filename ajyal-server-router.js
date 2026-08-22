@@ -98,4 +98,42 @@ router.get('/api/education/verify-cert/:id', (req, res) => {
 });
 
 module.exports = router;
+// إضافة المحركات والجسور المهنية الجديدة في واجهة الموجه الخادمي
+const express = require('express');
+const router = express.Router();
+const { AjyalOfflineSync } = require('./AjyalOfflineSync');
+const { AjyalSorobanEscrow } = require('./AjyalSorobanEscrow');
+
+const offlineEngine = new AjyalOfflineSync();
+const sorobanContract = new AjyalSorobanEscrow();
+
+// تهيئة محفظة تمويل دولية تجريبية فور تشغيل النظام
+sorobanContract.initializeDonorPool("UNICEF-YEM-2026", 50000); // 50,000 Pi مشفرة بالكامل
+
+// مسار احترافي: تحميل حزمة المساق للعمل دون إنترنت لقنوات الاتصال الضعيفة
+router.post('/api/pro/download-offline', (req, res) => {
+    const { piUserId, courseData } = req.body;
+    const offlinePackage = offlineEngine.packageCourseForOffline(courseData, piUserId);
+    res.json({ success: true, offlinePackage });
+});
+
+// مسار احترافي: مزامنة سجلات الطلاب الموقعة محلياً بعد عودة الإنترنت لديهم
+router.post('/api/pro/sync-offline-progress', async (req, res) => {
+    const result = await offlineEngine.syncOfflineProgressToServer();
+    res.json(result);
+});
+
+// مسار احترافي: صرف الحافز التعليمي عبر محاكاة عقود Soroban الذكية ببروتوكول 23
+router.post('/api/pro/blockchain-payout', (req, res) => {
+    const { studentWalletId, rewardStroops } = req.body;
+    try {
+        const txReceipt = sorobanContract.executeConditionalPayout("UNICEF-YEM-2026", studentWalletId, rewardStroops);
+        res.json({ success: true, txReceipt });
+    } catch (error) {
+        res.status(400).json({ success: false, error: error.message });
+    }
+});
+
+module.exports = router;
+
 
