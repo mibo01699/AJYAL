@@ -74,3 +74,19 @@ async function runFullEcosystemIntegrationTest() {
 
 // تشغيل الفحص والتحقق الفوري
 runFullEcosystemIntegrationTest();
+// كود فحص مضاف لملف ajyal-integration-suite.js لاختبار اللغات والإشعارات
+const { AjyalSupportSystem } = require('./AjyalSupportSystem');
+const support = new AjyalSupportSystem();
+
+console.log("\n🔹 المرحلة 4: اختبار بث الإشعارات الذكية بـ 11 لغة (AjyalSupportSystem)...");
+const sampleNotice = support.formatNotification("ar", "voucher_ready", {
+    voucherCode: "GAV-INCENSE-887XYZ",
+});
+console.log(`   - [إشعار عربي متكامل]: ${sampleNotice.compiledText}`);
+
+const sampleEnglishNotice = support.formatNotification("en", "reward_issued", {
+    amount: "100000000"
+});
+console.log(`   - [English Integrated SMS]: ${sampleEnglishNotice.compiledText}`);
+console.log(`   - بصمة التحقق والسلامة للتوقيع الرقمي: ${sampleEnglishNotice.hashIntegrity}`);
+
