@@ -135,5 +135,28 @@ router.post('/api/pro/blockchain-payout', (req, res) => {
 });
 
 module.exports = router;
+// تحديث المسارات البرمجية لدعم الربط الرباعي الشامل بين المستودعات الـ 4
+const { AjyalQuadOrchestrator } = require('./AjyalQuadOrchestrator');
+const quadMaster = new AjyalQuadOrchestrator();
+
+// تهيئة عقد مزاد راسي افتراضي فور تشغيل الخادم كمثال تطبيقي ممتثل
+quadMaster.registerWinningSupplierBid("AUC-YEM-2026-99", "SUPPLIER_AL_AMAL_LTD", "SCHOOL_NUTRITION", 10000); // 10,000 Pi locked
+
+// مسار المانحين: تشغيل دورة المعاملة المتكاملة عبر الأنظمة الأربعة بلمسة واحدة
+router.post('/api/ecosystem/trigger-quad-cycle', async (req, res) => {
+    const { piUserId, auctionId, courseId, lessonId, isSpecialNeeds } = req.body;
+    
+    try {
+        const result = await quadMaster.executeUnifiedEcosystemTransaction(piUserId, auctionId, courseId, lessonId, isSpecialNeeds);
+        res.json(result);
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
+// مسار التدقيق الدولي والرقابة اللامركزية المباشرة للأمم المتحدة والجهات الإغاثية عالمياً
+router.get('/api/ecosystem/global-donor-dashboard', (req, res) => {
+    res.json(quadMaster.generateGlobalDonorAuditDashboard());
+});
 
 
