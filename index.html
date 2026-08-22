@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة أجيال التعليمية اللامركزية | AJYAL Platform</title>
+    <style>
+        :root {
+            --pi-purple: #e0aa3e; /* لون مستوحى من ذهبية عملة شبكة Pi */
+            --bg-dark: #121214;
+            --card-bg: #1e1e24;
+            --text-light: #f5f5f7;
+            --text-muted: #a0a0ab;
+            --success-green: #10b981;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            margin: 0;
+            padding: 15px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* الهيدر وبصمة الهوية للمستخدم */
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 2px solid var(--pi-purple);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: var(--pi-purple);
+        }
+
+        .pi-user-badge {
+            background: #2a2a35;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            display: inline-block;
+            margin-top: 10px;
+            border: 1px solid #444;
+        }
+
+        /* بطاقات الدروس والمساقات */
+        .course-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .course-title {
+            font-size: 18px;
+            margin-top: 0;
+            color: #fff;
+        }
+
+        .progress-bar-container {
+            background-color: #333;
+            border-radius: 8px;
+            height: 12px;
+            width: 100%;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, var(--pi-purple), #f59e0b);
+            height: 100%;
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        /* أزرار التفاعل والمحاضرات */
+        .lesson-list {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+
+        .lesson-item {
+            background: #25252d;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .btn-action {
+            background-color: var(--pi-purple);
+            color: #000;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .btn-action:disabled {
+            background-color: #444;
+            color: var(--text-muted);
+            cursor: not-allowed;
+        }
+
+        /* لوحة المكافآت والشهادات */
+        .rewards-panel {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .reward-amount {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--success-green);
+            margin: 10px 0;
+        }
+
+        .certificate-box {
+            background: #111;
+            border: 1px dashed var(--pi-purple);
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 6px;
+            display: none;
+            font-family: monospace;
+            font-size: 11px;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- الهيدر المدمج مع البيئة التحتية لـ Pi Network -->
+    <div class="header">
+        <h1>منصة أجيال التعليمية اللامركزية</h1>
+        <p style="margin:5px 0; font-size:12px; color:var(--text-muted);">Sovereign Knowledge Gateway (Protocol 23)</p>
+        <div class="pi-user-badge">
+            👤 مستخدم Pi الموثق: <span id="pi-user-id">pi_user_yemen_99</span> | 📍 المنطقة: <span style="color:var(--success-green);">YEM (887)</span>
+        </div>
+    </div>
+
+    <!-- لوحة الميزانية والمكافآت الحية المصغرة للمانحين والطلاب -->
+    <div class="rewards-panel">
+        <h3 style="margin:0; font-size:15px;">💰 رصيد حوافز الطالب المتراكم</h3>
+        <div class="reward-amount"><span id="stroops-balance">0</span> Stroops</div>
+        <p style="margin:0; font-size:11px; color:var(--text-muted);">(1 Pi = 10,000,000 Stroops | ثابت حسابي بدون كسور)</p>
+    </div>
+
+    <!-- مساق تفاعلي افتراضي يمثل المنهج الوطني المستوعب -->
+    <div class="course-card">
+        <h3 class="course-title">📐 الرياضيات الأساسية - المنهج اليمني (YEM-MATH-01)</h3>
+        <p style="margin:0; font-size:13px; color:var(--text-muted);">أكمل الدروس الخمسة لتوليد شهادتك السيادية غير القابلة للتزوير وحصد حوافز الـ Pi.</p>
+        
+        <div class="progress-bar-container">
+            <div id="course-progress" class="progress-bar"></div>
+        </div>
+        <div style="text-align:left; font-size:12px; color:var(--pi-purple);" id="progress-text">نسبة الإنجاز: 0%</div>
+
+        <ul class="lesson-list">
+            <li class="lesson-item"><span>📚 الدرس 1: مدخل إلى المنطق الحسابي</span> <button class="btn-action" onclick="completeLesson(1, this)">دراسة وإنجاز</button></li>
+            <li class="lesson-item"><span>📚 الدرس 2: المجموعات والعلاقات الرياضية</span> <button class="btn-action" onclick="completeLesson(2, this)">دراسة وإنجاز</button></li>
+            <li class="lesson-item"><span>📚 الدرس 3: المعادلات الخطية وتحليلها</span> <button class="btn-action" onclick="completeLesson(3, this)">دراسة وإنجاز</button></li>
+            <li class="lesson-item"><span>📚 الدرس 4: حساب المثلثات التطبيقي</span> <button class="btn-action" onclick="completeLesson(4, this)">دراسة وإنجاز</button></li>
+            <li class="lesson-item"><span>📚 الدرس 5: الإحصاء والاحتمالات للمجتمعات</span> <button class="btn-action" onclick="completeLesson(5, this)">دراسة وإنجاز</button></li>
+        </ul>
+
+        <div style="text-align: center; margin-top: 15px;">
+            <button id="btn-cert" class="btn-action" style="padding: 10px 20px; background-color: #22c55e; color: #fff; width: 100%; display: none;" onclick="claimCertificate()">📜 إصدار وتوثيق الشهادة السيادية</button>
+        </div>
+
+        <div id="cert-display" class="certificate-box"></div>
+    </div>
+</div>
+
+<script>
+    // تهيئة المتغيرات الأساسية للمستخدم داخل محاكي متصفح Pi
+    const piUserId = "pi_user_yemen_99";
+    const courseId = "YEM-MATH-01";
+    const countryCode = 887; // رمز اليمن لمنع تسريب المساعدات جغرافياً
+    let completedLessonsCount = 0;
+    const totalLessons = 5;
+
+    // استدعاء الموجه الخلفي لتسجيل الدروس المنجزة وتحديث المكافآت
+    function completeLesson(lessonId, buttonElement) {
+        buttonElement.disabled = true;
+        buttonElement.innerText = "✓ تم الإنجاز";
+        buttonElement.style.backgroundColor = "#444";
+
+        completedLessonsCount++;
+        
+        // تحديث شريط تقدم الواجهة
+        const progressPercentage = (completedLessonsCount / totalLessons) * 100;
+        document.getElementById('course-progress').style.width = progressPercentage + '%';
+        document.getElementById('progress-text').innerText = `نسبة الإنجاز: ${progressPercentage}%`;
+
+        // محاكاة إرسال البيانات الميدانية إلى موجه الخادم (ajyal-server-router.js)
+        fetch('/api/education/complete-lesson', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ piUserId, courseId, lessonId, countryCode })
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log("Lesson updated:", data);
+            // عند اكتمال المساق، يتم عرض زر المطالبة بالشهادة وحوافز الـ BigInt
+            if (completedLessonsCount === totalLessons) {
+                document.getElementById('stroops-balance').innerText = "50,000,000"; // 5 Pi
+                document.getElementById('btn-cert').style.display = "block";
+            }
+        })
+        .catch(err => console.error("Error communicating with AJYAL node:", err));
+    }
+
+    // المطالبة بالشهادة السيادية غير القابلة للتزوير من الموثق
+    function claimCertificate() {
+        fetch('/api/education/issue-certificate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ piUserId, courseId, grade: "Excellent" })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.success) {
+                const cert = data.certificate;
+                const displayBox = document.getElementById('cert-display');
+                displayBox.style.display = "block";
+                displayBox.innerHTML = `
+                    <b style="color:var(--pi-purple);">[AJYAL SOVEREIGN CERTIFICATE REGISTRY]</b><br>
+                    ID: ${cert.certificateId}<br>
+                    USER HASH: ${cert.piUserId}<br>
+                    BLOCKCHAIN HASH (SHA-256):<br>
+                    <span style="color:#22c55e;">${cert.blockchainPayloadHash}</span><br>
+                    STATUS: ${cert.status}<br>
+                    ISSUED AT: ${cert.issuedAt}
+                `;
+                document.getElementById('btn-cert').disabled = true;
+                document.getElementById('btn-cert').innerText = "🔒 تم توثيقها بنجاح في السجل اللامركزي";
+            }
+        })
+        .catch(err => console.error("Error creating Sovereign credential:", err));
+    }
+</script>
+
+</body>
+</html>
