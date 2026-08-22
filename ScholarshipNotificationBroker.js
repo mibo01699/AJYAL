@@ -93,3 +93,44 @@ class ScholarshipNotificationBroker {
 }
 
 export default ScholarshipNotificationBroker;
+
+// ScholarshipNotificationBroker.js - وسيط إدارة وبث المنح الدراسية وعقود المانحين اللامركزية
+const crypto = require('crypto');
+
+class ScholarshipNotificationBroker {
+    constructor() {
+        this.activeScholarships = new Map(); // scholarshipId -> details
+    }
+
+    // الإعلان عن منحة دولية جديدة مدعومة من جهة مانحة بالـ Pi
+    announceScholarship(scholarshipId, donorName, totalStroopsAllocation) {
+        this.activeScholarships.set(scholarshipId, {
+            scholarshipId,
+            donorName,
+            totalStroopsAllocation: BigInt(totalStroopsAllocation),
+            enrolledStudents: [],
+            timestamp: new Date().toISOString()
+        });
+        return `Scholarship ${scholarshipId} funded by ${donorName} is live.`;
+    }
+
+    // ربط هوية الطالب بالمنحة فور تخطيه معايير الكفاءة
+    bindStudentToScholarship(scholarshipId, piUserId) {
+        const scheme = this.activeScholarships.get(scholarshipId);
+        if (!scheme) return { success: false, error: "المنحة المطلوبة غير موجودة." };
+
+        if (!scheme.enrolledStudents.includes(piUserId)) {
+            scheme.enrolledStudents.push(piUserId);
+        }
+        return {
+            success: true,
+            bindingId: `BIND-${crypto.randomBytes(4).toString('hex').toUpperCase()}`,
+            scholarshipId,
+            piUserId,
+            status: "COMMITTED_TO_DONOR_LEDGER"
+        };
+    }
+}
+
+module.exports = { ScholarshipNotificationBroker };
+
