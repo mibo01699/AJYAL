@@ -1,119 +1,108 @@
-// AJYAL Universal Multi-Language Support, AI Pedagogy Consultant & Strict Notifications Suite
-// Integrated with AjyalGrantControlBoard to enforce geographical validation metrics
-// Absolute Floating-Point Elimination Policy via BigInt.
+// AjyalSupportSystem.js - محرك الدعم متعدد اللغات ومستشار الذكاء الاصطناعي التربوي الشامل (Protocol 26)
+// يدعم 11 لغة عالمية لإشعارات الطلاب وأولياء أمورهم والمنظمات الدولية المانحة بمناطق النزاع
 
-import AjyalGrantControlBoard from './AjyalGrantControlBoard.js';
-
-const grantBoard = new AjyalGrantControlBoard();
+const crypto = require('crypto');
 
 class AjyalSupportSystem {
     constructor() {
-        this.PI_SCALE = 10000000n;      // 10^7 Precision mapping
-        this.YER_SCALE = 10000000000n;  // 10^10 Precision mapping
-        this.activeTickets = new Map();
-        this.ticketCounter = 0n;
-
-        // مصفوفة اللغات الـ 11 لتغطية شاملة لرواد منصة أجيال ونظام المساعدات العينية لذوي الاحتياجات الخاصة
-        this.localizationDict = {
-            "ar": { grant_blocked: "تنبيه: خدمات المكافآت أو المساعدات العينية محجوبة حالياً في هذه الدولة لعدم توفر تمويل دولي نشط.", success: "تم التحقق وصرف المكافأة التعليمية للمستفيد بنجاح واستقرار سيادي." },
-            "en": { grant_blocked: "Notice: Reward or voucher services are currently restricted in this region due to absence of active donor funding.", success: "Educational incentive validated and disbursed successfully under sovereign guidelines." },
-            "zh": { grant_blocked: "注意：由于缺乏活跃的捐赠资金，该地区目前限制奖励或凭证服务。", success: "教育激励已成功验证並根据主权指南发放。" },
-            "th": { grant_blocked: "ประกาศ: บริการรางวัลหรือบัตรกำนัลถูกจำกัดในภูมิภาคนี้เนื่องจากไม่มีทุนสนับสนุนจากผู้บริจาค.", success: "สิ่งจูงใจทางการศึกษาได้รับการตรวจสอบและชำระเงินสำเร็จแล้วภายใต้แนวทางหลัก." },
-            "tl": { grant_blocked: "Paunawa: Ang mga serbisyo ng gantimpala o voucher ay kasalukuyang pinaghihigpitan sa rehiyong ito dahil sa kawalan ng pondo.", success: "Matagumpay na napatunayan at naipamahagi ang insentibo sa edukasyon." },
-            "ms": { grant_blocked: "Notis: Perkhidmatan ganjaran atau baucar disekat di rantau ini kerana ketiadaan dana penderma yang aktif.", success: "Insentif pendidikan disahkan dan diagihkan dengan jaya di bawah garis panduan kedaulatan." },
-            "tr": { grant_blocked: "Uyarı: Aktif bağışçı fonu bulunmaması nedeniyle bu bölgede ödül veya kupon hizmetleri kısıtlanmıştır.", success: "Eğitim teşviki başarıyla doğrulandı ve egemen yönergeler kapsamında ödendi." },
-            "ko": { grant_blocked: "공지: 활성 기부자 자금이 없어 현재 이 지역에서는 보상 또는 바우처 서비스가 제한됩니다.", success: "주권 지침에 따라 교육 인센티브가 성공적으로 검증 및 지급되었습니다." },
-            "ru": { grant_blocked: "Уведомление: В этом регионе временно ограничены услуги вознаграждений или ваучеров из-за отсутствия финансирования.", success: "Образовательное поощрение успешно подтверждено и выплачено в соответствии с правилами." },
-            "hi": { grant_blocked: "सूचना: सक्रिय दाता वित्तपोषण की अनुपस्थिति के कारण इस क्षेत्र में पुरस्कार या वाउचर सेवाएं वर्तमान में प्रतिबंधित हैं।", success: "संप्रभु दिशानिर्देशों के तहत शैक्षिक प्रोत्साहन सफलतापूर्वक सत्यापित और वितरित किया गया।" },
-            "ur": { grant_blocked: "نوٹس: فعال ڈونر فنڈنگ کی عدم موجودگی کی وجہ سے اس خطے میں انعامات یا واؤچر کی خدمات فی الحال ممنوع ہیں۔", success: "تعلیمی ترغیب کی کامیابی سے تصدیق اور منتقلی خودمختار خطوط کے تحت کر دی گئی ہے۔" }
+        // قاموس اللغات الـ 11 المعتمدة رسمياً في مصفوفة أجيال الإنسانية والتعليمية
+        this.locales = {
+            ar: {
+                welcome: "مرحباً بك في منصة أجيال التعليمية السيادية.",
+                lesson_complete: "تهانينا! لقد أكملت بنجاح الدرس: {lessonId} في مساق {courseId}.",
+                reward_issued: "🔒 تم قفل الحافز المالي بنجاح وصرف: {amount} Stroops إلى حسابك المشفر.",
+                voucher_ready: "🎫 قسيمة الدعم العيني لـ [GAV - طريق البخور] جاهزة برقم: {voucherCode}. توجه لأقرب منفذ بيع معتمد مع قفل الأمان الجغرافي (YEM-887).",
+                ai_advice: "🤖 مستشار أجيال الذكي: بناءً على أدائك، ننصحك بالتركيز على مهارات الحساب والمنطق اللامركزي لتأهيلك لسوق العمل السيادي."
+            },
+            en: {
+                welcome: "Welcome to AJYAL Sovereign Educational Platform.",
+                lesson_complete: "Congratulations! You successfully completed lesson: {lessonId} in course {courseId}.",
+                reward_issued: "🔒 Financial micro-grant safely locked. Disbursed: {amount} Stroops to your cryptographic ledger.",
+                voucher_ready: "🎫 In-kind aid voucher from [GAV] is active: {voucherCode}. Proceed to the nearest certified merchant under geofence (YEM-887).",
+                ai_advice: "🤖 AJYAL AI Advisor: Based on your metrics, focus on cryptographic mathematics to enhance your readiness for the decentralized economy."
+            },
+            zh: { // الصينية
+                welcome: "欢迎来到 AJYAL 主权教育平台。",
+                lesson_complete: "恭喜！您成功完成了课程 {courseId} 中的第 {lessonId} 课。",
+                reward_issued: "🔒 经济微型资助已安全锁定。已向您的加密账本发放：{amount} Stroops。",
+                voucher_ready: "🎫 来自 [GAV] 的实物援助凭证已激活：{voucherCode}。请前往地理围栏（YEM-887）内最近的认证商户。"
+            },
+            th: { // التايلاندية
+                welcome: "ยินดีต้อนรับสู่แพลตฟอร์มการศึกษาอธิปไตย AJYAL",
+                lesson_complete: "ยินดีด้วย! คุณสำเร็จบทเรียน: {lessonId} ในหลักสูตร {courseId} แล้ว",
+                reward_issued: "🔒 ทุนสนับสนุนทางการเงินถูกล็อคอย่างปลอดภัยแล้ว จ่าย: {amount} Stroops เข้าสู่บัญชีเข้ารหัสของคุณ"
+            },
+            tl: { // التاغالوغية - الفلبين
+                welcome: "Maligayang pagdating sa AJYAL Sovereign Educational Platform.",
+                lesson_complete: "Pagbati! Matagumpay mong natapos ang aralin: {lessonId} sa kurso {courseId}.",
+                reward_issued: "🔒 Micro-grant na pinansyal ay ligtas na naka-lock. Ipinamahagi: {amount} Stroops sa iyong cryptographic ledger."
+            },
+            ms: { // الماليزية
+                welcome: "Selamat datang ke Platform Pendidikan Berdaulat AJYAL.",
+                lesson_complete: "Tahniah! Anda berjaya menyelesaikan pelajaran: {lessonId} dalam kursus {courseId}.",
+                reward_issued: "🔒 Geran mikro kewangan dikunci dengan selamat. Disalurkan: {amount} Stroops ke lebel kriptografi anda."
+            },
+            tr: { // التركية
+                welcome: "AJYAL Egemen Eğitim Platformuna Hoş Geldiniz.",
+                lesson_complete: "Tebrikler! {courseId} kursundaki {lessonId} dersini başarıyla tamamladınız.",
+                reward_issued: "🔒 Finansal mikro hibe güvenli bir şekilde kilitlendi. Kriptografik hesabınıza {amount} Stroops aktarıldı."
+            },
+            ko: { // الكورية
+                welcome: "AJYAL 주권 교육 플랫폼에 오신 것을 환영합니다.",
+                lesson_complete: "축하합니다! {courseId} 과정의 {lessonId} 과를 성공적으로 완료했습니다.",
+                reward_issued: "🔒 재정적 마이크로 보조금이 안전하게 잠겼습니다. 귀하의 암호화 장부에 {amount} Stroops가 지급되었습니다."
+            },
+            ru: { // الروسية
+                welcome: "Добро пожаловать на суверенную образовательную платформу AJYAL.",
+                lesson_complete: "Поздравляем! Вы успешно завершили урок: {lessonId} в курсе {courseId}.",
+                reward_issued: "🔒 Финансовый микрогрант надежно заблокирован. Выплачено: {amount} Stroops на ваш криптографический реестр."
+            },
+            hi: { // الهندية
+                welcome: "AJYAL संप्रभु शैक्षिक मंच पर आपका स्वागत है।",
+                lesson_complete: "बधाई हो! आपने {courseId} पाठ्यक्रम में पाठ: {lessonId} सफलतापूर्वक पूरा कर लिया है।",
+                reward_issued: "🔒 वित्तीय माइक्रो-अनुदान सुरक्षित रूप से लॉक कर दिया गया है। आपके क्रिप्टोग्राफिक लेज़र में {amount} Stroops वितरित किए गए।"
+            },
+            ur: { // الأوردية
+                welcome: "AJYAL مقتدر تعلیمی پلیٹ فارم پر خوش آمدید۔",
+                lesson_complete: "مبارک ہو! آپ نے {courseId} کورس میں سبق: {lessonId} کامیابی کے ساتھ مکمل کر لیا ہے۔",
+                reward_issued: "🔒 مالیاتی مائیکرو گرانٹ کو محفوظ طریقے سے لاک کر دیا گیا ہے۔ آپ کے کرپٹوگرافک لیجر میں {amount} Stroops منتقل کر دیے گئے۔"
+            }
         };
     }
 
-    /**
-     * [نظام الإشعارات الصارم بالـ BigInt]
-     * يولد إشعارات كسب النقاط أو الحجب الجغرافي بناءً على تمويل المنظمة المانحة
-     */
-    dispatchEducationalNotice(studentWallet, countryIso, operationType, rawAmountNominal, langCode) {
-        const amountStroopsInt = BigInt(Math.round(parseFloat(rawAmountNominal) * Number(this.PI_SCALE)));
-        const selectedLang = this.localizationDict[langCode] ? langCode : "en";
+    // 1. نظام صياغة الإشعارات المرنة الفورية واستبدال المتغيرات الحسابية واللوجستية
+    formatNotification(langCode, messageKey, variables = {}) {
+        const selectedLang = this.locales[langCode] || this.locales['ar']; // العودة للعربية كخيار سيادي أساسي
+        let messageString = selectedLang[messageKey] || "";
 
-        // التحقق الفوري من صمام الأمان الجغرافي للوحة التحكم قبل الصرف
-        const isEligible = grantBoard.assertGeographicalEligibility(countryIso, operationType);
-        
-        if (!isEligible) {
-            return {
-                recipient: studentWallet,
-                eventCode: "403_GEOGRAPHICALLY_BLOCKED",
-                ledgerValueSubUnits: "0",
-                translatedNotice: this.localizationDict[selectedLang].grant_blocked,
-                timestamp: Date.now().toString()
-            };
+        // معالجة وحقن المتغيرات الذكية داخل نصوص السلاسل البرمجية
+        for (const [key, value] of Object.entries(variables)) {
+            messageString = messageString.replace(new RegExp(`{${key}}`, 'g'), value);
         }
 
         return {
-            recipient: studentWallet,
-            eventCode: "200_INCENTIVE_ACTIVE",
-            ledgerValueSubUnits: amountStroopsInt.toString(),
-            translatedNotice: `${this.localizationDict[selectedLang].success} [Stroops: ${amountStroopsInt.toString()}]`,
-            timestamp: Date.now().toString()
+            lang: langCode,
+            key: messageKey,
+            compiledText: messageString,
+            hashIntegrity: crypto.createHash('sha256').update(messageString).digest('hex'),
+            deliveryNetwork: "LOW_BANDWIDTH_SMS_AND_MESH_ROUTING"
         };
     }
 
-    /**
-     * [مساعد دعم الذكاء الاصطناعي الفائق - AI Assistant]
-     * يفحص ويراجع أهليّة الطالب جغرافياً وحسابياً ويمنع أي كسور عشرية خبيثة
-     */
-    consultSensoryAi(queryText, countryIso, proposedRewardNominal, langCode) {
-        try {
-            const rewardInt = BigInt(Math.round(parseFloat(proposedRewardNominal) * Number(this.PI_SCALE)));
-            const selectedLang = this.localizationDict[langCode] ? langCode : "en";
-
-            // فحص التفعيل الجغرافي بواسطة الذكاء الاصطناعي
-            const isEligible = grantBoard.assertGeographicalEligibility(countryIso, "REWARDS");
-            if (!isEligible) {
-                return {
-                    aiVerdict: "GEOGRAPHICAL_FUND_RESTRICTION",
-                    isStructureValid: false,
-                    aiMessageText: this.localizationDict[selectedLang].grant_blocked
-                };
-            }
-
-            return {
-                aiVerdict: "COMPLIANCE_PASSED",
-                isStructureValid: true,
-                integerHex: "0x" + rewardInt.toString(16),
-                aiMessageText: this.localizationDict[selectedLang].success + ` (AI Internal Absolute BigInt Count: ${rewardInt.toString()})`
-            };
-        } catch (err) {
-            return {
-                aiVerdict: "FLOAT_LEAK_EXPLOIT_BLOCKED",
-                isStructureValid: false,
-                aiMessageText: "CRITICAL: AI Core rejected unsafe decimal variables inside educational checkout parameters."
-            };
+    // 2. مستشار الذكاء الاصطناعي التربوي المدمج (Edge AI Pedagogical Consultant Simulation)
+    // يقدم نصائح تربوية صلبة باللغات المختلفة دون استهلاك حزم الإنترنت
+    getAIPedagogicalAdvice(langCode, currentAcademicScore) {
+        const score = Number(currentAcademicScore);
+        const selectedLang = this.locales[langCode] || this.locales['ar'];
+        
+        if (score >= 85) {
+            return selectedLang.ai_advice || this.locales['ar'].ai_advice;
+        } else {
+            return langCode === 'en' 
+                ? "🤖 AJYAL AI Advisor: Excellent effort. We suggest reviewing basic algebra loops to unlock higher level micro-grants."
+                : "🤖 مستشار أجيال الذكي: مجهود رائع. نقترح عليك مراجعة حلقات الجبر الأساسية لفتح قنوات حوافز مالية أكبر في الدورات القادمة.";
         }
-    }
-
-    /**
-     * [نظام الدعم البشري للتذاكر]
-     * يفتح تذكرة فورية في حال حدوث نزاع مالي حول صرف المعونات أو حظر المنح في دولة محددة
-     */
-    openGeographicalDisputeTicket(studentWallet, countryIso, disputeCategoryInt, issueDescription) {
-        this.ticketCounter += 1n;
-        const currentTicketId = `AJYAL-GRANT-TICKET-${this.ticketCounter.toString()}`;
-
-        const ticketRecord = {
-            id: currentTicketId,
-            student: studentWallet,
-            region: countryIso.toUpperCase(),
-            categoryCode: BigInt(disputeCategoryInt).toString(), // مثل: 501n لنزاعات حجب الدول المانحة
-            description: issueDescription,
-            status: "OPEN_FOR_INTERNATIONAL_HUMAN_AUDIT",
-            createdTimestamp: Date.now().toString()
-        };
-
-        this.activeTickets.set(currentTicketId, ticketRecord);
-        return ticketRecord;
     }
 }
 
-export default AjyalSupportSystem;
+module.exports = { AjyalSupportSystem };
