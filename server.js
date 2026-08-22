@@ -376,4 +376,10 @@ app.get('/api/localization', (req, res) => {
 const ajyalRouter = require('./ajyal-server-router');
 app.use('/', ajyalRouter);
 
+const path = require('path');
+// جعل مجلد الواجهة الأمامية متاحاً للتصفح عبر متصفح البي
+app.use(express.static(path.join(__dirname, 'frontend')));
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
+});
 
