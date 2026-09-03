@@ -1,5 +1,5 @@
-run = "npm run dev"
-entrypoint = "src/main.js"
+run = "npm start"
+entrypoint = "server.js"
 
 [packager]
 language = "nodejs"
