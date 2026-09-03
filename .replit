@@ -3,3 +3,6 @@ entrypoint = "server.js"
 
 [packager]
 language = "nodejs"
+
+[env]
+NODE_ENV = "development"
