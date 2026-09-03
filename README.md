@@ -1,171 +1,106 @@
-AJYAL - Decentralized Knowledge & Youth Empowerment Platform
+# 🦅 AJYAL - منصة المعرفة اللامركزية وتمكين الشباب
 
-An open-source Web3 capacity building and digital educational gateway designed to cultivate the knowledge economy among youth in fragile and conflict-affected regions, fully optimized for the Pi Network Layer 1 (Protocol 23) ecosystem.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Node.js](https://img.shields.io/badge/Node.js-18.x-green.svg)](https://nodejs.org/)
+[![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black.svg)](https://vercel.com/)
 
----
-
-🎯 Strategic Alignment & Mission
-
-The AJYAL framework acts as the human capital engine for the integrated stabilization model established across our twin technical repositories:
-
-1. BIGISH-YER (The Core Financial Rail): Where financial liquidity and micro-payroll infrastructure are managed.
-2. GAV-The-Incense-Route (The Product Asset Rail): Where tracking logs for local independent agricultural producers are secured.
-
-AJYAL directly trains, organizes, and incentivizes networks of young technical enumerators and operators on the ground to deploy and facilitate these specialized Web3 interfaces inside rural and disconnected Yemeni merchant markets.
+> **⚠️ Important:** This is a **sandbox/testnet-only prototype**.  
+> It does **NOT** claim official certification or funding from any organization.
 
 ---
 
-AJYAL: Empowering Yemeni Youth Through Blockchain Literacy & Web3 Micro-Grants
+## 📖 نبذة عن المشروع
 
-AJYAL (Arabic for "Generations") is a digital public good framework designed to empower youth and children in conflict-affected areas like Yemen by introducing blockchain literacy, digital skills, and automated learning incentives powered by the Pi Network architecture.
-
----
-
-💡 Mission & UNICEF Priority Alignment
-
-The core objective of AJYAL is to combat youth unemployment and digital isolation. By leveraging an incentivized educational ecosystem, youth earn micro-rewards in Pi tokens upon achieving milestone competencies, bridging the gap between education and economic inclusion.
+**AJYAL** (أجيال) هي منصة تعليمية وتمكينية لامركزية مفتوحة المصدر، تستهدف **الشباب، الأطفال، والنساء** في مناطق النزاع. تقدم المنصة:
+- نظام تعليمي تفاعلي مع حوافز رقمية.
+- إدارة أكواد المساعدات العينية (مخصصة لذوي الاحتياجات الخاصة).
+- تكامل مع `BIGISH-YER` للتسوية المالية و `GAV` لتوزيع المساعدات.
 
 ---
 
-🛠️ Repository Logic & Architecture
+## 🎯 الرؤية والأهداف
 
-· ajyal_rewards.py: A modular Python pipeline that simulates enrollment protocols, progress tracking, and secure micro-grant delivery to student wallets using Pi Network SDK hooks.
-· Open Standard License: MIT Compliant digital framework.
+| الهدف | الوصف |
+|-------|-------|
+| **تمكين الشباب** | توفير مهارات رقمية ومعرفية عبر منصة تعليمية مفتوحة. |
+| **الحوافز التعليمية** | مكافآت رقمية (YER/Pi) مقابل إنجاز المهام التعليمية. |
+| **المساعدات العينية** | إدارة أكواد مساعدة مشفرة لذوي الاحتياجات الخاصة. |
+| **التكامل المنظومي** | الربط مع `BIGISH-YER` و `GAV` لضمان تسليم المساعدات. |
 
 ---
 
-🖥️ Run the Protocol Demonstration
+## 🛠️ المكونات الأساسية
 
-To simulate the educational escrow and reward framework, execute:
+| الملف | الوصف |
+|-------|-------|
+| `server.js` | نقطة الدخول الرئيسية (متوافقة مع Vercel) |
+| `AjyalGrantControlBoard.js` | نظام التحكم في المنح والمساعدات الجغرافية |
+| `AjyalSupportSystem.js` | دعم متعدد اللغات ونظام استشارات ذكي |
+| `YemenCurriculumIngestion.js` | دمج المنهاج اليمني مع نظام التتبع |
+| `ajyal_rewards.py` | نظام المكافآت التعليمية (بايثون) |
+| `voucher-system.js` | نظام إدارة أكواد المساعدات |
+
+---
+
+## 🔌 واجهات برمجة التطبيقات (APIs)
+
+| المسار | الطريقة | الوصف |
+|--------|---------|-------|
+| `/api/health` | GET | التحقق من صحة الخادم |
+| `/api/voucher/generate` | POST | إنشاء كود مساعدة جديد |
+| `/api/voucher/verify` | POST | التحقق من صحة الكود |
+| `/api/voucher/redeem` | POST | صرف الكود (استبدال سلع) |
+| `/api/voucher/list/:beneficiaryId` | GET | قائمة أكواد المستفيد |
+| `/api/voucher/stats` | GET | إحصائيات الأكواد |
+
+---
+
+## 🚀 التشغيل والنشر
+
+### التشغيل المحلي
 
 ```bash
-python ajyal_rewards.py
+# استنساخ المستودع
+git clone https://github.com/mibo01699/AJYAL.git
+cd AJYAL
+
+# تثبيت الاعتماديات
+npm install
+
+# تشغيل الخادم
+npm start
+```
+
+النشر على Vercel
+
+المشروع مهيأ للنشر الفوري على Vercel. قم بربط المستودع بحساب Vercel وسيتم النشر تلقائياً.
+
+---
+
+🧪 الاختبارات
+
+```bash
+npm test
 ```
 
 ---
 
-📈 Socio-Economic Vision
+🔗 التكامل مع المشاريع الأخرى
 
-This project functions as the human development pillar supporting the macroeconomic architectures outlined in Research Papers 11046 and 11129. It prepares the local workforce to manage the future decentralized infrastructure of Yemen.
-
----
-
-🔒 Strict Technical Alignment (Pi Core Mandates)
-
-· KYC Bound User Base: To assure strict compliance for international donor funding and eradicate fraud, access to the AJYAL peer-to-peer ecosystem is exclusively mapped via the Pi Authentication SDK. Every student and coach must be verified through the official Pi Biometric KYC system.
-· Micro-Incentive Settlements: Learning achievements, micro-task verifications, and knowledge sharing fees are managed without cash or external tokens. The engine triggers localized service rewards using the hybrid YER/Pi settlement network operated by the BIGISH treasury backend.
-· MIT Digital Public Good: Fully certified under the MIT License to run transparently as an accessible Digital Public Good (DPG) serving UN Sustainable Development Goal 4 (Quality Education) and Goal 8 (Decent Work & Economic Growth).
+المشروع الوصف الرابط
+BIGISH-YER البنية التحتية المالية الأساسية GitHub
+GAV سلسلة التوريد والتجارة GitHub
+Suppliers Auction منصة المزادات والمشتريات GitHub
 
 ---
 
-🧩 In-Kind Aid Voucher Management System
+📄 الترخيص
 
-AJYAL includes an integrated system for managing encrypted in-kind aid vouchers, exclusively dedicated to people with special needs and congenital disabilities.
-
-Key Features:
-
-· Encrypted Voucher Generation: Unique codes for each beneficiary and each food basket.
-· Validity Verification: Ensures vouchers are not expired or already redeemed.
-· Goods Redemption: Vouchers can be exchanged for goods at point-of-sale (via GAV application).
-· Integration with BIGISH-YER: Financial settlement of POS dues.
-
-Core APIs:
-
-· POST /api/voucher/generate – Issue a new voucher code.
-· POST /api/voucher/verify – Verify voucher validity.
-· POST /api/voucher/redeem – Redeem voucher (exchange for goods).
-· GET /api/voucher/list/:piUserId – List all vouchers for a beneficiary.
-· GET /api/voucher/stats – Voucher statistics and analytics.
-
-Integration with Other Applications:
-
-· GAV: Uses /api/voucher/verify and /api/voucher/redeem APIs for goods redemption.
-· BIGISH-YER: Uses the clearing system (clearing-system.js) for payment settlement.
+هذا المشروع مرخص تحت رخصة MIT، مما يجعله متاحاً كمنفعة عامة رقمية (Digital Public Good).
 
 ---
 
-AJYAL - Sovereign Educational Governance & Multi-Grant Control Infrastructure
-
-The decentralized knowledge economy engine and capacity-building gateway optimized for Pi Network Layer 1 (Protocol 23) and aligned with UNICEF Innovation Fund 2026 standards. This repository acts as the human development pillar supporting the macroeconomic architectures outlined in Research Papers 11046 and 11129.
-
----
-
-🌍 Sovereign Grant Control Board (Geographical Targeting)
-
-To comply with international humanitarian funding regulations, strict geographical ring-fencing constraints are natively hardcoded into the architectural core. The AjyalGrantControlBoard gives administrative authorities atomic control over financial disbursement vectors:
-
-1. Targeted Disbursement: Micro-rewards (Pi) and In-kind Assistance Vouchers (YER) can be dynamically activated or restricted per country/jurisdiction based on active donor funding loops.
-2. Fraud Mitigation: Prevent cross-border capital drainage by automatically dropping requests originating from non-funded geographic zones through integer-based ISO country registry checks.
-3. Zero Floating-Point Constraint: All total grant volumes, remaining allocations, and reward milestones are managed under a strict BigInt Fixed-Point Arithmetic standard ($1 \text{ Pi} = 10^7 \text{ Stroops}$ and $1 \text{ YER} = 10^{10}$ subunits) to prevent banking rounding exploits.
-
----
-
-🛠️ Directory Structure & Autonomous Core Files
-
-· manifest.json: Defines the Pi Browser ecosystem integration configurations and enforces biometric Pi KYC authentication requirements for all coaches and students.
-· AjyalGrantControlBoard.js: The administrative security filter managing active international grants and validating geographic eligibility for resource allocation.
-· AjyalSupportSystem.js: Combines the absolute float-free notification channel, the autonomous AI pedagogical consultant, and the multi-language support network across 11 core global languages (Arabic, English, Chinese, Thai, Tagalog, Malay, Turkish, Korean, Russian, Hindi, Urdu).
-· YemenCurriculumIngestion.js: Implements the Phase 1 ingestion matrix of the Yemeni National Curriculum, mapping progress tracking nodes to strict integer wallet rewards.
-· ajyal-server-router.js: Exposes secure REST endpoints for administrative, educational, and multi-modal sensory operations.
-· ajyal-compliance-test.js: Local unit test pipeline validating integer processing limits and geographical safety blocks.
-
----
-
-📂 Repository Structure Overview
-
-```
-AJYAL/
-├── ajyal_rewards.py                # Core reward pipeline (Python)
-├── AjyalGrantControlBoard.js       # Grant control and geographical filtering
-├── AjyalSupportSystem.js           # AI support and multilingual engine
-├── YemenCurriculumIngestion.js     # Curriculum mapping and progress tracking
-├── ajyal-server-router.js          # Backend API router for Replit deployment
-├── ajyal-compliance-test.js        # Unit tests for compliance validation
-├── manifest.json                   # Pi Browser configuration
-├── docs/
-│   ├── WHITEPAPER.md               # Comprehensive protocol documentation
-│   └── BUSINESS_PLAN.md            # Monetization and sustainability plan
-└── README.md                       # Main entry point
-```
-
----
-
-🔗 Related Repositories
-
-· BIGISH-YER: Financial Infrastructure → github.com/mibo01699/BIGISH-YER
-· GAV-The-Incense-Route: Supply Chain & Trade → github.com/mibo01699/GAV-The-Incense-Route
-· Suppliers Auction: Decentralized Bidding Protocol → github.com/mibo01699/suppliers-auction
-
----
-
-🚀 Deployment on Replit
-
-This project is designed to be easily deployed and run on Replit (https://replit.com). Follow these steps:
-
-How to Deploy
-
-1. Create a new Repl:
-   · Log in to your Replit account.
-   · Click on the "Create Repl" button.
-   · Choose "Import from GitHub".
-   · Paste the URL of this repository: https://github.com/mibo01699/AJYAL.
-   · Click "Import".
-2. Run the application:
-   · After the import completes, Replit will automatically detect the configuration.
-   · Click the "Run" button at the top.
-3. Access the application:
-   · Once the server starts, Replit will provide a webview or a URL to access the application.
-   · The backend API will be available at the provided URL (e.g., https://ajyal.YOUR_USERNAME.repl.co).
-
----
-
-📄 License
-
-All AJYAL projects are released under the MIT License, ensuring they remain freely available as Digital Public Goods (DPGs) for the global community.
-
----
-
-📬 Contact
+📬 التواصل
 
 · Official X: @Arabianeagleaec
 · CEO X: @YemenPi
@@ -173,4 +108,5 @@ All AJYAL projects are released under the MIT License, ensuring they remain free
 
 ---
 
-© 2026 Arabian Eagle Corporation (A.E.C.) – Building the Digital Future for Conflict-Affected Regions
+🦅 Developed by Arabian Eagle Technology Group (A.E.C.)
+Building the Digital Future for Conflict-Affected Regions
